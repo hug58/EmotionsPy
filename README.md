@@ -2,11 +2,6 @@
 
 # Getting started
 
-To get you started on the challenge quickly, we have created some bootstrapping scripts to make things easier.
-
-In plain language all you need to do is create a virtualenv[^1] and run the bootstrap target with make.
-
-A detailed step by step description is:
 
 ```
 virtualenv venv
