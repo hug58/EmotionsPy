@@ -11,7 +11,11 @@ run:
 	python manage.py runserver
 
 
-bootstrap: requirements migrate
+data:
+	python -m nltk.downloader stopwords
+	python -m nltk.downloader punkt
+
+bootstrap: requirements migrate data
 	@echo "-------------------------"
 	@echo "Your environment is ready"
 	@echo "Now run: make run"

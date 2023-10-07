@@ -16,5 +16,13 @@ COPY . .
 # Expone el puerto en el que se ejecutará la aplicación
 EXPOSE 8000
 
+RUN python manage.py migrate
+
+
+# Install NLTK data
+RUN python -m nltk.downloader punkt
+RUN python -m nltk.downloader stopwords
+
+
 # Define el comando para ejecutar la aplicación
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

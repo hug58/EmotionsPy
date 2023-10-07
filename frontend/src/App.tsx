@@ -14,9 +14,6 @@ const App: React.FC = () => {
     setShowUserCreationForm(true);
   };
 
-  const handleFormSubmit = () => {
-    setIsLoggedIn(true);
-  };
 
   useEffect(() => {
     const token = localStorage.getItem('token');
