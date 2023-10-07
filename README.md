@@ -4,7 +4,7 @@
 
 
 ```
-virtualenv venv
+python -m venv venv
 source venv/bin/activate
 make bootstrap
 make run
