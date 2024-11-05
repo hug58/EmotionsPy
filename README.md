@@ -4,18 +4,7 @@ App that analyzes the feelings and emotions of the 5 most used words. It takes a
 
 # Getting started
 
-
+load local environment and running docker compose. easy
 ```
-python -m venv venv
-source venv/bin/activate
-make bootstrap
-make run
-```
-
-also the backend is dockerized
-
-
-```
-docker build -t sys-emotion-sentiment .
-docker run -p 8000:8000 sys-emotion-sentiment
+docker compose up -d
 ```
