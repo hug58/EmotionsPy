@@ -14,7 +14,6 @@ const App: React.FC = () => {
     setShowUserCreationForm(true);
   };
 
-
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -41,7 +40,7 @@ const App: React.FC = () => {
       <div className="card">
         <div className="card-body text-center">
           {isLoggedIn ? (
-            <Dashboard />
+            <Dashboard/>
           ) : (
             <>
               {showUserCreationForm ? (

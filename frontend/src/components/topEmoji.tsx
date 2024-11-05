@@ -1,32 +1,19 @@
-import  { useEffect, useState } from 'react';
 
-interface Emoji {
+export interface Emoji {
   emoji: string;
   count: number;
 }
 
-function EmojiComponent() {
-  const [data, setData] = useState<Emoji[]>([]);
+export interface EmojiProps {
+  emojis: Emoji[]; // Asegúrate de que sea un arreglo de TopWord
+}
 
-  useEffect(() => { 
-    const fetchData = async () => {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:8000/api/v1/top/emojis/', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const jsonData = await response.json();
-      setData(jsonData);
-    };
-
-    fetchData();
-  }, []);
-
+export function EmojiComponent(emojis: EmojiProps) {
   return (
     <div className="container">
+    { emojis.emojis.length > 0 && (<h1 className="mt-4">Top 10 Emojis</h1>) }
       <div className="row">
-        {data.map((item, index) => (
+        {emojis.emojis.map((item, index) => (
           <div className="col-md-3" key={item.emoji}>
             <div className="card mt-2">
               <div className="card-body">
@@ -40,6 +27,3 @@ function EmojiComponent() {
     </div>
   );
 }
-
-export default EmojiComponent;
-  

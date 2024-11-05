@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  common:
+    container_name: app
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python manage.py migrate && 
+             python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DOCKER_TIMEZONE=America/Caracas
+      - TOKEN_API_HUGGING=${TOKEN_API_HUGGING}
+      - SECRET_KEY=${SECRET_KEY}
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+      - POSTGRES_PORT=5432
+    depends_on:
+      - db
+    networks:
+      - fullstack
+  db:
+    image: postgres:17.0
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres_volumen:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+    networks:
+      - fullstack
+
+networks:
+  fullstack:
+    driver: bridge
+volumes:
+    postgres_volumen:

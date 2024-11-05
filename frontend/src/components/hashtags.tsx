@@ -1,40 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
-interface Hashtag {
+export interface Hashtag {
   name: string;
   count: number;
 }
 
-const HashtagList: React.FC = () => {
-  const [hashtags, setHashtags] = useState<Hashtag[]>([]);
-  const token = localStorage.getItem('token');
+interface HashtagProps {
+  hashtags: Hashtag[]; // Asegúrate de que sea un arreglo de TopWord
+}
 
-  useEffect(() => {
-    const fetchHashtags = async () => {
-      try {
-        const response = await axios.get<Hashtag[]>(
-          'http://localhost:8000/api/v1/top/hashtags/',
-          {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setHashtags(response.data);
-      } catch (error) {
-        console.error('Error fetching hashtags:', error);
-      }
-    };
 
-    fetchHashtags();
-  }, []);
-
+export const HashtagList: React.FC<HashtagProps> = (hashtagsProps: HashtagProps) => {
   return (
     <div className="container">
-      <h1>Top Hashtags</h1>
+      {hashtagsProps.hashtags.length > 0 && (<h1>Top Hashtags</h1>)}
       <ul className="list-group">
-        {hashtags.map((hashtag, index) => (
+        {hashtagsProps.hashtags.map((hashtag, index) => (
           <li key={index} className="list-group-item">
             {hashtag.name} - {hashtag.count}
           </li>

@@ -8,13 +8,12 @@ import requests
 import os
 
 APIS = {
-    'sentiment': "https://api-inference.huggingface.co/models/finiteautomata/beto-sentiment-analysis",
-    'emotion': "https://api-inference.huggingface.co/models/finiteautomata/beto-emotion-analysis",
+'sentiment': "https://api-inference.huggingface.co/models/finiteautomata/beto-sentiment-analysis",
+'emotion': "https://api-inference.huggingface.co/models/finiteautomata/beto-emotion-analysis",
 }
 
 class HandleApi:
     """Handle para interactuar con la api de huggin faces"""
-
 
     def __init__(self,option:str, workers:int=20) -> None:
         logging.basicConfig(level=logging.INFO)
@@ -24,21 +23,28 @@ class HandleApi:
         self._session = requests.Session()
 
         #for development purposes it is left here by default
-        token:str = os.getenv('TOKEN_HUGGIN','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') 
+        token:str = os.getenv('TOKEN_API_HUGGING')
+
         self._headers = {
             "Authorization": f"Bearer {token}",
             "Accept-Encoding": "gzip",
         }
 
 
-    def query(self,payload:Dict[str, str]) -> Optional[List[dict]]:
+    @property
+    def headers(self):
+        """ HEADERS """
+        return self._headers
+
+
+    def query(self,payload:Dict[str, str]) -> dict:
         """ Perform queries using the data from the CSV."""
-        respond = self._session.post(self._url, headers=self._headers, json=payload,timeout=60)
+        respond = self._session.post(self._url, headers=self.headers, json=payload,timeout=60)
 
         # Retry the request if it fails and the maximum number of tries is not reached
         while respond.status_code != 200 and self._try > 0:
             try:
-                respond = requests.post(self._url, headers=self._headers, json=payload,timeout=60)
+                respond = requests.post(self._url, headers=self.headers, json=payload,timeout=60)
                 time.sleep(1)
             except requests.exceptions.ReadTimeout:
                 continue

@@ -9,25 +9,21 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/api/token/', {
+      const response = await axios.post(import.meta.env.VITE_SERVER_URL + 'api/token/', {
         username,
         password,
       });
 
-      console.log('test')
 
       console.log(response.data)
-      // Verificar si se generó un token de autenticación válido en la respuesta
       if (response.data.access) {
-        // Guardar el token en el almacenamiento local o en el estado de la aplicación
         localStorage.setItem('token', response.data.access);
         localStorage.setItem('refresh', response.data.refresh);
-        // Redirigir al dashboard
+        localStorage.setItem('username',username)
         window.location.href = '/dashboard';
       }
     } catch (error) {
-      // Manejar el caso de inicio de sesión fallido
-      console.log('Inicio de sesión fallido');
+      console.log('Login failed');
     }
   };
 

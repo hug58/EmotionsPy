@@ -25,7 +25,7 @@ const checkTokenExpiration = (token: string): boolean => {
 
 const renewToken = async (): Promise<string> => {
     try {
-      const response = await axios.post('http://localhost:8000/api/token/refresh/', {
+      const response = await axios.post(import.meta.env.VITE_SERVER_URL + 'api/token/refresh/', {
         refresh: localStorage.getItem('refresh'),
       });
 

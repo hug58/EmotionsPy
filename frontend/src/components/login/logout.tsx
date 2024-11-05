@@ -7,9 +7,8 @@ const LogoutButton: React.FC = () => {
       const refreshToken = localStorage.getItem('refresh'); // Obtén el token de actualización almacenado en el almacenamiento local
 
       if (refreshToken) {
-        await axios.post('http://localhost:8000/api/token/logout/', { refresh: refreshToken });
+        await axios.post(import.meta.env.VITE_SERVER_URL + 'api/token/logout/', { refresh: refreshToken });
         // Realiza cualquier otra acción necesaria después del logout
-
         localStorage.removeItem('token'); // Borra el token de acceso del almacenamiento local
         localStorage.removeItem('refresh'); // Borra el token de actualización del almacenamiento local
         window.location.reload();

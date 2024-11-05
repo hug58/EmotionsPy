@@ -61,9 +61,10 @@ const AnalyticsComponent: React.FC<AnalyticsComponentProps> = ({ input, option }
     const fetchData = async () => {
       const token = localStorage.getItem('token');
 
+      const url = import.meta.env.VITE_SERVER_URL + 'api/v1/analysis/'
       try {
         const response = await axios.post<EmotionResponse[]>(
-          'http://localhost:8000/api/v1/analytics/',
+          url,
           {
             inputs: input,
             option: option,
@@ -78,7 +79,6 @@ const AnalyticsComponent: React.FC<AnalyticsComponentProps> = ({ input, option }
         const emotionLabel = response.data;
         setEmotion(calcularMedia(emotionLabel));
 
-        console.log(emotion)
       } catch (error) {
         console.error(error);
       }
