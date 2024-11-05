@@ -5,11 +5,17 @@
 In the project directory, you can run:
 
 1.install dependecies:
-```
+```bash
 npm i
 ```
-2.Execute in the folder: 
+2.Load environment
+
+```bash 
+        export VITE_SERVER_URL="http://localhost:8000/"
 ```
+
+3.Execute in the folder: 
+```bash
 npm run dev
 ```
 
