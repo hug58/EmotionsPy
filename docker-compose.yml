@@ -1,6 +1,4 @@
-version: '3'
 services:
-
   frontend:
     build:
       context: ./frontend
@@ -9,7 +7,6 @@ services:
       - VITE_SERVER_URL=http://127.0.0.1:8000/
     ports:
       - '5173:5173'
-
     volumes:
       - ./frontend/.env.local:/app/.env
 
@@ -53,7 +50,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
     volumes:
-      - postgres_volumen:/var/lib/postgresql
+      - postgres_volume:/var/lib/postgresql
     ports:
       - "5432:5432"
     healthcheck:
@@ -68,4 +65,4 @@ networks:
   fullstack:
     driver: bridge
 volumes:
-    postgres_volumen:
+    postgres_volume:
