@@ -3,14 +3,13 @@ import {Emoji, EmojiComponent} from './topEmoji';
 import {Hashtag, HashtagList} from './hashtags';
 
 import LogoutButton from './login/logout';
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 
 const Dashboard: React.FC = () => {
 
   const username = localStorage.getItem('username')
-  const [userData, setUserData] = useState(null);
   const [userEmojis, setUserEmojis] = useState<Emoji[]>([]);
   const [userTopWord, setUserTopWord] = useState<TopWord[]>([]);
   const [userTags, setUserTags] = useState<Hashtag[]>([]);
@@ -46,7 +45,6 @@ const Dashboard: React.FC = () => {
                 'Content-Type': 'multipart/form-data',
             },
         });
-        setUserData(response.data)
         setUserTopWord(response.data.words)
         setUserEmojis(response.data.emojis)
         setUserTags(response.data.hashtags)

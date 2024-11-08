@@ -23,5 +23,5 @@ RUN python -m nltk.downloader punkt
 RUN python -m nltk.downloader stopwords
 
 
-# Define el comando para ejecutar la aplicación
-# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "backend.wsgi:application", "--config", "gunicorn.py"]
+

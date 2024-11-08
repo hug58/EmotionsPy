@@ -9,6 +9,8 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
 
     try {
+        console.log("logging")
+        console.log(import.meta.env.VITE_SERVER_URL)
       const response = await axios.post(import.meta.env.VITE_SERVER_URL + 'api/token/', {
         username,
         password,

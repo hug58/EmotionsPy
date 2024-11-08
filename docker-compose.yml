@@ -1,7 +1,25 @@
 version: '3'
 services:
 
-  common:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - VITE_SERVER_URL=http://127.0.0.1:8000/
+    ports:
+      - '5173:5173'
+
+    volumes:
+      - ./frontend/.env.local:/app/.env
+
+    depends_on:
+      backend:
+        condition: service_healthy
+
+    networks:
+      - fullstack
+  backend:
     container_name: app
     build: .
     restart: always
@@ -14,25 +32,35 @@ services:
       - DOCKER_TIMEZONE=America/Caracas
       - TOKEN_API_HUGGING=${TOKEN_API_HUGGING}
       - SECRET_KEY=${SECRET_KEY}
-      - POSTGRES_USER=user
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=postgres
       - POSTGRES_PORT=5432
     depends_on:
       - db
+    healthcheck:
+      test: curl --fail http://localhost:8000/api/schema/swagger-ui/ || exit 1
+      interval: 5s
+      timeout: 50s
+      retries: 5
     networks:
       - fullstack
   db:
     image: postgres:17.0
     restart: always
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: postgres
     volumes:
       - postgres_volumen:/var/lib/postgresql
     ports:
       - "5432:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - fullstack
 
