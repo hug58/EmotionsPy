@@ -3,5 +3,6 @@ db.sqlite3
 venv
 .venv
 .env
-*.log
 .idea
+logs/gunicorn_access.log
+logs/gunicorn_error.log
