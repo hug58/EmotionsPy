@@ -4,5 +4,4 @@ venv
 .venv
 .env
 .idea
-logs/gunicorn_access.log
-logs/gunicorn_error.log
+logs
