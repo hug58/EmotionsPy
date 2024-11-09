@@ -3,4 +3,5 @@ db.sqlite3
 venv
 .venv
 .env
-logs/*
+*.log
+.idea
