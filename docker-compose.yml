@@ -6,25 +6,24 @@ services:
     environment:
       - VITE_SERVER_URL=http://127.0.0.1:8000/
     ports:
-      - '5173:5173'
-    volumes:
-      - ./frontend/.env.local:/app/.env
-
+      - "3000:5173"
     depends_on:
       backend:
         condition: service_healthy
-
     networks:
       - fullstack
+
   backend:
     container_name: app
     build: .
     restart: always
+    volumes:
+      - ./logs:/app/logs/
     ports:
       - "8000:8000"
     command: >
-      sh -c "python manage.py migrate && 
-             python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py migrate 
+      && gunicorn sys_emotion_sentiment.wsgi:application --config gunicorn.py"
     environment:
       - DOCKER_TIMEZONE=America/Caracas
       - TOKEN_API_HUGGING=${TOKEN_API_HUGGING}
@@ -38,10 +37,11 @@ services:
     healthcheck:
       test: curl --fail http://localhost:8000/api/schema/swagger-ui/ || exit 1
       interval: 5s
-      timeout: 50s
+      timeout: 1h
       retries: 5
     networks:
       - fullstack
+
   db:
     image: postgres:17.0
     restart: always
