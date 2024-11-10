@@ -38,7 +38,7 @@ const LoginForm: React.FC = () => {
             type="text"
             id="username"
             className="form-control"
-            placeholder="input your username"
+            placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -49,7 +49,7 @@ const LoginForm: React.FC = () => {
             type="password"
             id="password"
             className="form-control"
-            placeholder="input your password"
+            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
