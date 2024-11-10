@@ -55,7 +55,7 @@ const LoginForm: React.FC = () => {
           />
         </div>
         <div className="text-center">
-          <button type="submit" className="btn btn-primary" style={{ margin: '10px' }}>Login</button>
+          <button type="submit" className="btn btn-primary" style={{ margin: '10px' }}>Sign in</button>
         </div>
       </form>
     </div>

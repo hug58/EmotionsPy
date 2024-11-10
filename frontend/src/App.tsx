@@ -34,8 +34,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-  
-
   return (
       <div className="card">
         <div className="card-body text-center">
@@ -50,7 +48,7 @@ const App: React.FC = () => {
               )}
               {!showUserCreationForm && (
                 <button onClick={handleCreateUserClick} className="btn btn-primary">
-                  Crear Usuario
+                  Sign Up
                 </button>
               )}
             </>
