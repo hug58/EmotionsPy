@@ -4,19 +4,16 @@ import axios from 'axios';
 const LogoutButton: React.FC = () => {
   const handleLogout = async () => {
     try {
-      const refreshToken = localStorage.getItem('refresh'); // Obtén el token de actualización almacenado en el almacenamiento local
-
+      const refreshToken = localStorage.getItem('refresh');
       if (refreshToken) {
         await axios.post(import.meta.env.VITE_SERVER_URL + 'api/token/logout/', { refresh: refreshToken });
-        // Realiza cualquier otra acción necesaria después del logout
-        localStorage.removeItem('token'); // Borra el token de acceso del almacenamiento local
-        localStorage.removeItem('refresh'); // Borra el token de actualización del almacenamiento local
+        localStorage.removeItem('token');
+        localStorage.removeItem('refresh');
         window.location.reload();
       } else {
-        console.error('No se encontró el token de actualización en el almacenamiento local.');
+        console.error('The update token was not found in local storage.');
       }
     } catch (error) {
-      // Maneja el error en caso de que ocurra
       console.error('Error al realizar logout:', error);
     }
   };

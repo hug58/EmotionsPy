@@ -5,21 +5,17 @@ import jwt_decode from 'jwt-decode';
 const checkTokenExpiration = (token: string): boolean => {
   try {
     const decodedToken: any = jwt_decode(token);
-    const expirationDate: number = decodedToken.exp * 1000; // Convertir la fecha de expiración a milisegundos
-
-    // Obtener la fecha actual en milisegundos
+    const expirationDate: number = decodedToken.exp * 1000;
     const currentDate: number = new Date().getTime();
 
-    // Verificar si la fecha de expiración es menor que la fecha actual
     if (expirationDate < currentDate) {
-      return true; // El token ha expirado
+      return true; // token has expired
     } else {
-      return false; // El token no ha expirado
+      return false; // token has not expired
     }
   } catch (error) {
-    // Manejar el error en caso de que el token no sea válido
-    console.log('Error al decodificar el token:', error);
-    return false; // Considerar que el token no ha expirado en caso de error
+    console.log('Error decoding the token:', error);
+    return false;
   }
 };
 

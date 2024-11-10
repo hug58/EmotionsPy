@@ -50,7 +50,7 @@ const UserCreationForm: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <button type="submit" className="btn btn-primary" style={{ margin: '10px' }}>Crear Usuario</button>
+          <button type="submit" className="btn btn-primary" style={{ margin: '10px' }}>Sign Up</button>
         </div>
       </form>
     </div>

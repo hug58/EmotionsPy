@@ -16,7 +16,6 @@ const LoginForm: React.FC = () => {
         password,
       });
 
-
       console.log(response.data)
       if (response.data.access) {
         localStorage.setItem('token', response.data.access);
@@ -33,7 +32,6 @@ const LoginForm: React.FC = () => {
     <div className="login-container d-flex align-items-center justify-content-center">
       <form onSubmit={handleLogin} className="login-form">
         <h2 className="text-center text-white">Login</h2>
-
         <div className="form-group">
           <label htmlFor="username" className="text-white">Username</label>
           <input
@@ -45,7 +43,6 @@ const LoginForm: React.FC = () => {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="password" className="text-white">Password</label>
           <input
@@ -57,7 +54,6 @@ const LoginForm: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
         <div className="text-center">
           <button type="submit" className="btn btn-primary" style={{ margin: '10px' }}>Login</button>
         </div>
